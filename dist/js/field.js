@@ -127,8 +127,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         return [String(option.value), option.label];
       }));
       return doctorIds.map(function (doctorId) {
-        var key = String(doctorId);
-        return optionsMap.get(key) || "#".concat(doctorId);
+        return optionsMap.get(String(doctorId));
+      }).filter(function (label) {
+        return Boolean(label);
       });
     }
   }
@@ -535,8 +536,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         return [String(option.value), option.label];
       }));
       return doctorIds.map(function (doctorId) {
-        var key = String(doctorId);
-        return optionsMap.get(key) || "#".concat(doctorId);
+        return optionsMap.get(String(doctorId));
+      }).filter(function (label) {
+        return Boolean(label);
       });
     }
   }

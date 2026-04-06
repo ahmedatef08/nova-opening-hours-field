@@ -139,11 +139,9 @@ export default {
                 ]),
             );
 
-            return doctorIds.map((doctorId) => {
-                const key = String(doctorId);
-
-                return optionsMap.get(key) || `#${doctorId}`;
-            });
+            return doctorIds
+                .map((doctorId) => optionsMap.get(String(doctorId)))
+                .filter((label) => Boolean(label));
         },
     },
 };
