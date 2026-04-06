@@ -54,7 +54,15 @@
                                     "
                                 />
                             </div>
-                            <div v-else>{{ interval.interval.time }}</div>
+                            <div v-else>
+                                <div>{{ interval.interval.time }}</div>
+                                <div
+                                    v-if="getDoctorLabels(interval.interval.doctor_ids).length"
+                                    class="doctorList"
+                                >
+                                    {{ getDoctorLabels(interval.interval.doctor_ids).join(', ') }}
+                                </div>
+                            </div>>
                         </div>
                     </div>
                     <div v-else>{{ __("Closed") }}</div>
@@ -117,6 +125,27 @@ export default {
         "addException",
         "renameException",
     ],
+
+    methods: {
+        getDoctorLabels(doctorIds) {
+            if (!Array.isArray(doctorIds) || !doctorIds.length) {
+                return [];
+            }
+
+            const optionsMap = new Map(
+                (this.doctorOptions || []).map((option) => [
+                    String(option.value),
+                    option.label,
+                ]),
+            );
+
+            return doctorIds.map((doctorId) => {
+                const key = String(doctorId);
+
+                return optionsMap.get(key) || `#${doctorId}`;
+            });
+        },
+    },
 };
 </script>
 
@@ -125,5 +154,12 @@ export default {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.doctorList {
+    color: rgba(var(--colors-gray-500), 1);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-top: 0.25rem;
 }
 </style>

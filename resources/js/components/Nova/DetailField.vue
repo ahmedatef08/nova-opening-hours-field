@@ -1,8 +1,12 @@
 <template>
     <panel-item :field="field">
         <template #value>
-            <week-table :week="normalizedWeek"/>
-            <exceptions-table v-if="showExceptionsTable" :exceptions="normalizedExceptions"/>
+            <week-table :week="normalizedWeek" :doctor-options="doctorOptions"/>
+            <exceptions-table
+                v-if="showExceptionsTable"
+                :exceptions="normalizedExceptions"
+                :doctor-options="doctorOptions"
+            />
         </template>
     </panel-item>
 </template>
@@ -11,9 +15,13 @@
 import WeekTable from "../WeekTable";
 import ExceptionsTable from "../ExceptionsTable";
 import {ExceptionsMixin, WeekMixin} from "../../src/mixins";
+import { normalizeDoctorOptions } from "../../src/func";
 
 export default {
     components: {WeekTable, ExceptionsTable},
+        doctorOptions() {
+                    return normalizeDoctorOptions(this.field.doctorOptions);
+                },
 
     mixins: [WeekMixin, ExceptionsMixin],
 

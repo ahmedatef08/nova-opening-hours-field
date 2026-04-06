@@ -117,7 +117,21 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     TableHeader: _TableHeader__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _src_props__WEBPACK_IMPORTED_MODULE_6__.exceptionsProp), _src_props__WEBPACK_IMPORTED_MODULE_6__.editableProp), _src_props__WEBPACK_IMPORTED_MODULE_6__.useTextInputsProp), _src_props__WEBPACK_IMPORTED_MODULE_6__.doctorOptionsProp),
-  emits: ["updateInterval", "removeInterval", "addInterval", "removeException", "addException", "renameException"]
+  emits: ["updateInterval", "removeInterval", "addInterval", "removeException", "addException", "renameException"],
+  methods: {
+    getDoctorLabels: function getDoctorLabels(doctorIds) {
+      if (!Array.isArray(doctorIds) || !doctorIds.length) {
+        return [];
+      }
+      var optionsMap = new Map((this.doctorOptions || []).map(function (option) {
+        return [String(option.value), option.label];
+      }));
+      return doctorIds.map(function (doctorId) {
+        var key = String(doctorId);
+        return optionsMap.get(key) || "#".concat(doctorId);
+      });
+    }
+  }
 });
 
 /***/ },
@@ -227,6 +241,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WeekTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../WeekTable */ "./resources/js/components/WeekTable.vue");
 /* harmony import */ var _ExceptionsTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ExceptionsTable */ "./resources/js/components/ExceptionsTable.vue");
 /* harmony import */ var _src_mixins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/mixins */ "./resources/js/src/mixins.js");
+/* harmony import */ var _src_func__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/func */ "./resources/js/src/func.js");
+
 
 
 
@@ -234,6 +250,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     WeekTable: _WeekTable__WEBPACK_IMPORTED_MODULE_0__["default"],
     ExceptionsTable: _ExceptionsTable__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  doctorOptions: function doctorOptions() {
+    return (0,_src_func__WEBPACK_IMPORTED_MODULE_3__.normalizeDoctorOptions)(this.field.doctorOptions);
   },
   mixins: [_src_mixins__WEBPACK_IMPORTED_MODULE_2__.WeekMixin, _src_mixins__WEBPACK_IMPORTED_MODULE_2__.ExceptionsMixin],
   props: ['resource', 'resourceName', 'resourceId', 'field'],
@@ -507,7 +526,19 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   props: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _src_props__WEBPACK_IMPORTED_MODULE_5__.weekProp), _src_props__WEBPACK_IMPORTED_MODULE_5__.editableProp), _src_props__WEBPACK_IMPORTED_MODULE_5__.useTextInputsProp), _src_props__WEBPACK_IMPORTED_MODULE_5__.doctorOptionsProp),
   emits: ["updateInterval", "removeInterval", "addInterval", "removeAllIntervals"],
   methods: {
-    capitalizeFirstLetter: _src_func__WEBPACK_IMPORTED_MODULE_6__.capitalizeFirstLetter
+    capitalizeFirstLetter: _src_func__WEBPACK_IMPORTED_MODULE_6__.capitalizeFirstLetter,
+    getDoctorLabels: function getDoctorLabels(doctorIds) {
+      if (!Array.isArray(doctorIds) || !doctorIds.length) {
+        return [];
+      }
+      var optionsMap = new Map((this.doctorOptions || []).map(function (option) {
+        return [String(option.value), option.label];
+      }));
+      return doctorIds.map(function (doctorId) {
+        var key = String(doctorId);
+        return optionsMap.get(key) || "#".concat(doctorId);
+      });
+    }
   }
 });
 
@@ -621,9 +652,13 @@ var _hoisted_8 = {
   key: 1
 };
 var _hoisted_9 = {
-  key: 1
+  key: 0,
+  "class": "doctorList"
 };
 var _hoisted_10 = {
+  key: 1
+};
+var _hoisted_11 = {
   "class": "actionButtons"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -679,8 +714,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onRemoveInterval: function onRemoveInterval($event) {
               return _ctx.$emit('removeInterval', 'exceptions', exception.date, index);
             }
-          }, null, 8 /* PROPS */, ["interval-prop", "doctor-options", "use-text-inputs", "onUpdateInterval", "onRemoveInterval"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(interval.interval.time), 1 /* TEXT */))]);
-        }), 128 /* KEYED_FRAGMENT */))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__("Closed")), 1 /* TEXT */))];
+          }, null, 8 /* PROPS */, ["interval-prop", "doctor-options", "use-text-inputs", "onUpdateInterval", "onRemoveInterval"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(interval.interval.time), 1 /* TEXT */), $options.getDoctorLabels(interval.interval.doctor_ids).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDoctorLabels(interval.interval.doctor_ids).join(', ')), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])), _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("> ", -1 /* CACHED */))]);
+        }), 128 /* KEYED_FRAGMENT */))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__("Closed")), 1 /* TEXT */))];
       }),
       _: 2 /* DYNAMIC */
     }, 1024 /* DYNAMIC_SLOTS */), _ctx.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_table_column, {
@@ -688,7 +723,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "text-right"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_button, {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_button, {
           onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
             return _ctx.$emit('addInterval', 'exceptions', exception.date);
           }, ["prevent"])
@@ -799,11 +834,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     value: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_week_table, {
-        week: _ctx.normalizedWeek
-      }, null, 8 /* PROPS */, ["week"]), $options.showExceptionsTable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_exceptions_table, {
+        week: _ctx.normalizedWeek,
+        "doctor-options": _ctx.doctorOptions
+      }, null, 8 /* PROPS */, ["week", "doctor-options"]), $options.showExceptionsTable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_exceptions_table, {
         key: 0,
-        exceptions: _ctx.normalizedExceptions
-      }, null, 8 /* PROPS */, ["exceptions"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        exceptions: _ctx.normalizedExceptions,
+        "doctor-options": _ctx.doctorOptions
+      }, null, 8 /* PROPS */, ["exceptions", "doctor-options"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["field"]);
@@ -1037,9 +1074,13 @@ var _hoisted_5 = {
   key: 1
 };
 var _hoisted_6 = {
-  "class": "actionButtons"
+  key: 0,
+  "class": "doctorList"
 };
 var _hoisted_7 = {
+  "class": "actionButtons"
+};
+var _hoisted_8 = {
   key: 0
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1079,7 +1120,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onRemoveInterval: function onRemoveInterval($event) {
               return _ctx.$emit('removeInterval', 'week', day.day, index);
             }
-          }, null, 8 /* PROPS */, ["interval-prop", "doctor-options", "use-text-inputs", "onUpdateInterval", "onRemoveInterval"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(interval.interval.time), 1 /* TEXT */))]);
+          }, null, 8 /* PROPS */, ["interval-prop", "doctor-options", "use-text-inputs", "onUpdateInterval", "onRemoveInterval"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(interval.interval.time), 1 /* TEXT */), $options.getDoctorLabels(interval.interval.doctor_ids).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDoctorLabels(interval.interval.doctor_ids).join(', ')), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]))]);
         }), 128 /* KEYED_FRAGMENT */))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 1,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -1093,11 +1134,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "text-right"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_button, {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_button, {
           onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
             return _ctx.$emit('addInterval', 'week', day.day);
           }, ["prevent"])
-        }, null, 8 /* PROPS */, ["onClick"]), Object.values(day.intervals).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_remove_button, {
+        }, null, 8 /* PROPS */, ["onClick"]), Object.values(day.intervals).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_remove_button, {
           onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
             return _ctx.$emit('removeAllIntervals', 'week', day.day);
           }, ["prevent"])
@@ -1498,7 +1539,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.actionButtons[data-v-9a86c8e2] {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.actionButtons[data-v-9a86c8e2] {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\n}\n.doctorList[data-v-9a86c8e2] {\r\n    color: rgba(var(--colors-gray-500), 1);\r\n    font-size: 0.75rem;\r\n    line-height: 1rem;\r\n    margin-top: 0.25rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1570,7 +1611,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.actionButtons[data-v-20dcfd42] {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.actionButtons[data-v-20dcfd42] {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\n}\n.doctorList[data-v-20dcfd42] {\r\n    color: rgba(var(--colors-gray-500), 1);\r\n    font-size: 0.75rem;\r\n    line-height: 1rem;\r\n    margin-top: 0.25rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
