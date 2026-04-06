@@ -162,8 +162,4 @@ export default {
     line-height: 1rem;
     margin-top: 0.25rem;
 }
-
-.doctorIndicator {
-    margin-right: 0.25rem;
-}
 </style>
