@@ -13,20 +13,23 @@
             @blur="syncTime"
             v-model="to"
         />
-        <select
-            v-if="doctorOptions.length"
-            v-model="slot.doctor_ids"
-            multiple
-            class="doctorIds"
-        >
-            <option
-                v-for="doctorOption in doctorOptions"
-                :key="doctorOption.value"
-                :value="doctorOption.value"
-            >
-                {{ doctorOption.label }}
-            </option>
-        </select>
+        <div v-if="doctorOptions.length" class="doctorPicker">
+            <div class="doctorPickerTitle">Doctors</div>
+            <div class="doctorIds">
+                <label
+                    v-for="doctorOption in doctorOptions"
+                    :key="doctorOption.value"
+                    class="doctorOption"
+                >
+                    <input
+                        v-model="slot.doctor_ids"
+                        type="checkbox"
+                        :value="doctorOption.value"
+                    />
+                    <span>{{ doctorOption.label }}</span>
+                </label>
+            </div>
+        </div>
         <span class="intervalRemove">
             <remove-button @click.prevent="$emit('removeInterval')" />
         </span>
@@ -112,19 +115,48 @@ export default {
     line-height: 1;
 }
 
+.doctorPicker {
+    min-width: 12rem;
+}
+
+.doctorPickerTitle {
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #374151;
+}
+
 .doctorIds {
     min-width: 11rem;
-    max-height: 6.5rem;
+    max-height: 7rem;
     overflow-y: auto;
     padding: 0.375rem 0.5rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
     background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .dark .doctorIds {
     border-color: #4b5563;
     background-color: #111827;
+}
+
+.doctorOption {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem;
+    color: #111827;
+    cursor: pointer;
+}
+
+.dark .doctorPickerTitle,
+.dark .doctorOption {
+    color: #e5e7eb;
 }
 
 .intervalRemove {

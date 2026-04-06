@@ -722,8 +722,15 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "interval"
 };
-var _hoisted_2 = ["value"];
+var _hoisted_2 = {
+  key: 0,
+  "class": "doctorPicker"
+};
 var _hoisted_3 = {
+  "class": "doctorIds"
+};
+var _hoisted_4 = ["value"];
+var _hoisted_5 = {
   "class": "intervalRemove"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -737,7 +744,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.from = $event;
     })
-  }, null, 8 /* PROPS */, ["time-prop", "use-text-inputs", "onBlur", "modelValue"]), _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  }, null, 8 /* PROPS */, ["time-prop", "use-text-inputs", "onBlur", "modelValue"]), _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "intervalSeparator"
   }, "-", -1 /* CACHED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_time_input, {
     "time-prop": _ctx.to,
@@ -747,19 +754,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.to = $event;
     })
-  }, null, 8 /* PROPS */, ["time-prop", "use-text-inputs", "onBlur", "modelValue"]), _ctx.doctorOptions.length ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("select", {
-    key: 0,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.slot.doctor_ids = $event;
-    }),
-    multiple: "",
-    "class": "doctorIds"
-  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.doctorOptions, function (doctorOption) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+  }, null, 8 /* PROPS */, ["time-prop", "use-text-inputs", "onBlur", "modelValue"]), _ctx.doctorOptions.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "doctorPickerTitle"
+  }, "Doctors", -1 /* CACHED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.doctorOptions, function (doctorOption) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", {
       key: doctorOption.value,
+      "class": "doctorOption"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+        return _ctx.slot.doctor_ids = $event;
+      }),
+      type: "checkbox",
       value: doctorOption.value
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(doctorOption.label), 9 /* TEXT, PROPS */, _hoisted_2);
-  }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.slot.doctor_ids]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_remove_button, {
+    }, null, 8 /* PROPS */, _hoisted_4), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.slot.doctor_ids]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(doctorOption.label), 1 /* TEXT */)]);
+  }), 128 /* KEYED_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_remove_button, {
     onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('removeInterval');
     }, ["prevent"]))
@@ -1514,7 +1522,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.interval[data-v-400171ac] {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\r\n    flex-wrap: wrap;\n}\n.intervalSeparator[data-v-400171ac] {\r\n    line-height: 1;\n}\n.doctorIds[data-v-400171ac] {\r\n    min-width: 11rem;\r\n    max-height: 6.5rem;\r\n    overflow-y: auto;\r\n    padding: 0.375rem 0.5rem;\r\n    border: 1px solid #d1d5db;\r\n    border-radius: 0.375rem;\r\n    background-color: #ffffff;\n}\n.dark .doctorIds[data-v-400171ac] {\r\n    border-color: #4b5563;\r\n    background-color: #111827;\n}\n.intervalRemove[data-v-400171ac] {\r\n    display: inline-flex;\r\n    align-items: center;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.interval[data-v-400171ac] {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.5rem;\r\n    flex-wrap: wrap;\n}\n.intervalSeparator[data-v-400171ac] {\r\n    line-height: 1;\n}\n.doctorPicker[data-v-400171ac] {\r\n    min-width: 12rem;\n}\n.doctorPickerTitle[data-v-400171ac] {\r\n    margin-bottom: 0.25rem;\r\n    font-size: 0.75rem;\r\n    font-weight: 600;\r\n    letter-spacing: 0.02em;\r\n    color: #374151;\n}\n.doctorIds[data-v-400171ac] {\r\n    min-width: 11rem;\r\n    max-height: 7rem;\r\n    overflow-y: auto;\r\n    padding: 0.375rem 0.5rem;\r\n    border: 1px solid #d1d5db;\r\n    border-radius: 0.375rem;\r\n    background-color: #ffffff;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.25rem;\n}\n.dark .doctorIds[data-v-400171ac] {\r\n    border-color: #4b5563;\r\n    background-color: #111827;\n}\n.doctorOption[data-v-400171ac] {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.45rem;\r\n    font-size: 0.8125rem;\r\n    color: #111827;\r\n    cursor: pointer;\n}\n.dark .doctorPickerTitle[data-v-400171ac],\r\n.dark .doctorOption[data-v-400171ac] {\r\n    color: #e5e7eb;\n}\n.intervalRemove[data-v-400171ac] {\r\n    display: inline-flex;\r\n    align-items: center;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
