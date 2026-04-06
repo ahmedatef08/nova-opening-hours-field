@@ -1,22 +1,24 @@
 <template>
     <default-field :field="currentField" :errors="errors">
         <template #field>
-<!--            <week-table :week="normalizedWeek"/>-->
+            <!--            <week-table :week="normalizedWeek"/>-->
             <week-table
                 :week="normalizedWeek"
                 :editable="true"
                 :use-text-inputs="currentField.useTextInputs"
+                :doctor-options="doctorOptions"
                 @updateInterval="updateInterval"
                 @addInterval="addInterval"
                 @removeInterval="removeInterval"
                 @removeAllIntervals="removeAllIntervals"
             />
-<!--            <exceptions-table :exceptions="normalizedExceptions"/>-->
+            <!--            <exceptions-table :exceptions="normalizedExceptions"/>-->
             <exceptions-table
                 v-if="currentField.allowExceptions"
                 :exceptions="normalizedExceptions"
                 :editable="true"
                 :use-text-inputs="currentField.useTextInputs"
+                :doctor-options="doctorOptions"
                 @updateInterval="updateInterval"
                 @addInterval="addInterval"
                 @removeInterval="removeInterval"
@@ -29,15 +31,30 @@
 </template>
 
 <script>
-import { DependentFormField, HandlesValidationErrors } from 'laravel-nova';
+import { DependentFormField, HandlesValidationErrors } from "laravel-nova";
 import WeekTable from "./../WeekTable";
 import ExceptionsTable from "./../ExceptionsTable";
-import {ExceptionsMixin, WeekMixin} from "../../src/mixins";
-import {getRandomDate, getRandomTimeInterval} from "../../src/func";
+import { ExceptionsMixin, WeekMixin } from "../../src/mixins";
+import {
+    getRandomDate,
+    getRandomTimeSlot,
+    normalizeDoctorOptions,
+} from "../../src/func";
 export default {
-    components: {WeekTable, ExceptionsTable},
+    components: { WeekTable, ExceptionsTable },
 
-    mixins: [DependentFormField, HandlesValidationErrors, WeekMixin, ExceptionsMixin],
+    mixins: [
+        DependentFormField,
+        HandlesValidationErrors,
+        WeekMixin,
+        ExceptionsMixin,
+    ],
+
+    computed: {
+        doctorOptions() {
+            return normalizeDoctorOptions(this.currentField.doctorOptions);
+        },
+    },
 
     methods: {
         fill(formData) {
@@ -46,8 +63,8 @@ export default {
                 JSON.stringify({
                     ...this.week,
                     exceptions: this.exceptions,
-                })
-            )
+                }),
+            );
         },
 
         updateInterval(weekOrExceptions, dayOrDate, index, value) {
@@ -55,26 +72,26 @@ export default {
         },
 
         removeInterval(weekOrExceptions, dayOrDate, index) {
-            this[weekOrExceptions][dayOrDate].splice(index, 1)
-            this.$forceUpdate()
+            this[weekOrExceptions][dayOrDate].splice(index, 1);
+            this.$forceUpdate();
         },
 
         addInterval(weekOrExceptions, dayOrDate) {
             this[weekOrExceptions] = {
                 ...this[weekOrExceptions],
                 [dayOrDate]: [
-                    ...this[weekOrExceptions][dayOrDate] || [],
-                    getRandomTimeInterval()
+                    ...(this[weekOrExceptions][dayOrDate] || []),
+                    getRandomTimeSlot(),
                 ],
             };
         },
 
         removeAllIntervals(weekOrExceptions, dayOrDate) {
-            this[weekOrExceptions][dayOrDate] = []
+            this[weekOrExceptions][dayOrDate] = [];
         },
 
         addException() {
-            this.exceptions[getRandomDate()] = [getRandomTimeInterval()];
+            this.exceptions[getRandomDate()] = [getRandomTimeSlot()];
         },
 
         removeException(date) {
@@ -82,10 +99,10 @@ export default {
         },
 
         renameException(oldDate, newDate) {
-            let exception = this.exceptions[oldDate]
+            let exception = this.exceptions[oldDate];
 
             // this.$delete(this.exceptions, oldDate)
-            delete this.exceptions[oldDate]
+            delete this.exceptions[oldDate];
             this.exceptions[newDate] = exception;
         },
     },
@@ -104,6 +121,5 @@ export default {
     //         deep: true,
     //     },
     // },
-
-}
+};
 </script>

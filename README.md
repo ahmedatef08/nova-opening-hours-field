@@ -50,6 +50,10 @@ NovaOpeningHoursField::make(__('Opening Hours'), 'opening_hours'),
 // ->allowExceptions(FALSE)    // TRUE by default
 // ->allowOverflowMidnight(TRUE)  // FALSE by default
 // ->useTextInputs(TRUE)  // FALSE by default
+// ->doctorOptions([
+//     ['value' => 1, 'label' => 'Dr. Smith'],
+//     ['value' => 2, 'label' => 'Dr. Adams'],
+// ])
 ```
 
 ## Known issues

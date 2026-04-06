@@ -1,4 +1,4 @@
-import {getExceptionsData, getWeekData, randomString} from "./func";
+import { getExceptionsData, getWeekData, normalizeSlot, randomString } from "./func";
 
 export var WeekMixin = {
     data: function () {
@@ -33,7 +33,7 @@ export var ExceptionsMixin = {
             for (let [date, intervals] of Object.entries(this.exceptions)) {
                 res.push({
                     date: date,
-                    intervals: intervals,
+                    intervals: normalizeIntervals(intervals),
                 })
             }
 
@@ -45,10 +45,10 @@ export var ExceptionsMixin = {
 function normalizeIntervals(intervals) {
     let res = []
 
-    for (let [index, interval] of Object.entries(intervals)) {
+    for (let interval of intervals || []) {
         res.push({
             key: randomString(),
-            interval: interval,
+            interval: normalizeSlot(interval),
         })
     }
 

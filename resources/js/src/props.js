@@ -1,4 +1,4 @@
-import {EMPTY_WEEK} from "./const";
+import { EMPTY_WEEK } from "./const";
 
 export const weekProp = {
     week: {
@@ -28,5 +28,12 @@ export const useTextInputsProp = {
     useTextInputs: {
         type: Boolean,
         default: false,
+    },
+}
+
+export const doctorOptionsProp = {
+    doctorOptions: {
+        type: Array,
+        default: () => [],
     },
 }
