@@ -19,15 +19,16 @@ import { normalizeDoctorOptions } from "../../src/func";
 
 export default {
     components: {WeekTable, ExceptionsTable},
-        doctorOptions() {
-                    return normalizeDoctorOptions(this.field.doctorOptions);
-                },
 
     mixins: [WeekMixin, ExceptionsMixin],
 
     props: ['resource', 'resourceName', 'resourceId', 'field'],
 
     computed: {
+        doctorOptions() {
+            return normalizeDoctorOptions(this.field.doctorOptions)
+        },
+
         showExceptionsTable() {
             return this.field.allowExceptions
                 && Object.keys(this.normalizedExceptions).length

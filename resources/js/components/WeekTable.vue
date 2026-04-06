@@ -48,6 +48,7 @@
                                     v-if="getDoctorLabels(interval.interval.doctor_ids).length"
                                     class="doctorList"
                                 >
+                                    <span class="doctorIndicator">></span>
                                     {{ getDoctorLabels(interval.interval.doctor_ids).join(', ') }}
                                 </div>
                             </div>
@@ -148,5 +149,9 @@ export default {
     font-size: 0.75rem;
     line-height: 1rem;
     margin-top: 0.25rem;
+}
+
+.doctorIndicator {
+    margin-right: 0.25rem;
 }
 </style>
