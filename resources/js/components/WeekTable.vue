@@ -50,19 +50,18 @@
                     </div>
                 </table-column>
                 <table-column v-if="editable" class="text-right">
-                    <add-button
-                        @click.prevent="$emit('addInterval', 'week', day.day)"
-                    />
-                    <span
-                        v-if="Object.values(day.intervals).length"
-                        class="ml-2"
-                    >
-                        <remove-button
-                            @click.prevent="
-                                $emit('removeAllIntervals', 'week', day.day)
-                            "
+                    <div class="actionButtons">
+                        <add-button
+                            @click.prevent="$emit('addInterval', 'week', day.day)"
                         />
-                    </span>
+                        <span v-if="Object.values(day.intervals).length">
+                            <remove-button
+                                @click.prevent="
+                                    $emit('removeAllIntervals', 'week', day.day)
+                                "
+                            />
+                        </span>
+                    </div>
                 </table-column>
             </tr>
         </tbody>
@@ -111,3 +110,11 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.actionButtons {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+</style>

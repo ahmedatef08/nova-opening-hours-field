@@ -6,7 +6,7 @@
             @blur="syncTime"
             v-model="from"
         />
-        -
+        <span class="intervalSeparator">-</span>
         <time-input
             :time-prop="to"
             :use-text-inputs="useTextInputs"
@@ -17,7 +17,7 @@
             v-if="doctorOptions.length"
             v-model="slot.doctor_ids"
             multiple
-            class="doctorIds ml-2"
+            class="doctorIds"
         >
             <option
                 v-for="doctorOption in doctorOptions"
@@ -27,7 +27,7 @@
                 {{ doctorOption.label }}
             </option>
         </select>
-        <span class="ml-2">
+        <span class="intervalRemove">
             <remove-button @click.prevent="$emit('removeInterval')" />
         </span>
     </div>
@@ -102,9 +102,33 @@ export default {
 <style scoped>
 .interval {
     margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.intervalSeparator {
+    line-height: 1;
 }
 
 .doctorIds {
-    min-width: 10rem;
+    min-width: 11rem;
+    max-height: 6.5rem;
+    overflow-y: auto;
+    padding: 0.375rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+}
+
+.dark .doctorIds {
+    border-color: #4b5563;
+    background-color: #111827;
+}
+
+.intervalRemove {
+    display: inline-flex;
+    align-items: center;
 }
 </style>

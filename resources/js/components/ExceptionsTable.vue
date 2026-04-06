@@ -60,17 +60,18 @@
                     <div v-else>{{ __("Closed") }}</div>
                 </table-column>
                 <table-column v-if="editable" class="text-right">
-                    <add-button
-                        @click.prevent="
-                            $emit('addInterval', 'exceptions', exception.date)
-                        "
-                    />
-                    &nbsp;
-                    <remove-button
-                        @click.prevent="
-                            $emit('removeException', exception.date)
-                        "
-                    />
+                    <div class="actionButtons">
+                        <add-button
+                            @click.prevent="
+                                $emit('addInterval', 'exceptions', exception.date)
+                            "
+                        />
+                        <remove-button
+                            @click.prevent="
+                                $emit('removeException', exception.date)
+                            "
+                        />
+                    </div>
                 </table-column>
             </tr>
         </tbody>
@@ -118,3 +119,11 @@ export default {
     ],
 };
 </script>
+
+<style scoped>
+.actionButtons {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+</style>
